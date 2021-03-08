@@ -1,4 +1,4 @@
-const { fabric } = require("./fabric");
+
 
 var canvas= new fabric.Canvas('myCanvas');
 block_image_width=30;
@@ -7,12 +7,13 @@ player_x=10;
 player_y=10;
 var player_object="";
 function player_update(){
-    fabric.Image.fromURL("https://i.postimg.cc/zDwfFdYY/player.png",function(Img){
-        player_object.scaleToWidth(150);
-         player_object.scaleToHeight(140);
-          player_object.set({ top:player_y, left:player_x });
-           canvas.add(player_object);
-    });
+    fabric.Image.fromURL("https://i.postimg.cc/zDwfFdYY/player.png", function(Img) {
+         player_object = Img;
+         player_object.scaleToWidth(150);
+          player_object.scaleToHeight(140);
+           player_object.set({ top:player_y, left:player_x });
+            canvas.add(player_object); });
+            
 }
 function new_image(get_image)
  { fabric.Image.fromURL(get_image, function(Img) {
@@ -54,3 +55,39 @@ new_image('https://i.postimg.cc/FscwL6M0/spiderman-body.png');
              } if(keyPressed == '39') { right();
                  console.log("right");
                  } }
+                 function up() {
+    if (player_y >= 0) {
+        player_y = player_y - block_image_height;
+        console.log("block image height=" + block_image_height);
+        console.log("hen up arrow key is pressed,X=" + player_x + ",Y =" + player_y);
+        canvas.remove(player_object);
+        player_update();
+    }
+}
+function down() {
+    if (player_y <= 500) {
+        player_y = player_y + block_image_height;
+        console.log("block image height=" + block_image_height);
+        console.log("hen up arrow key is pressed,X=" + player_x + ",Y =" + player_y);
+        canvas.remove(player_object);
+        player_update();
+    }
+}
+function left() {
+    if (player_x > 0) {
+        player_x = player_x - block_image_width;
+        console.log("block image height=" + block_image_width);
+        console.log("hen left arrow key is pressed,X=" + player_x + ",Y =" + player_y);
+        canvas.remove(player_object);
+        player_update();
+    }
+}
+function right() {
+    if (player_x <= 800) {
+        player_x = player_x + block_image_width;
+        console.log("block image width=" + block_image_width);
+        console.log("when right arrow key is pressed,X=" + player_x + ",Y =" + player_y);
+        canvas.remove(player_object);
+        player_update();
+    }
+}
